@@ -1,13 +1,11 @@
-// esp32cam_stream.ino
-// Minimal camera webserver for ESP32-CAM (AI-Thinker module).
-// Remember to set WiFi SSID and PASS.
+
 
 #include "esp_camera.h"
 #include <WiFi.h>
 
 // Replace with your network credentials
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
+const char* ssid = "";
+const char* password = "";
 
 void startCameraServer();
 

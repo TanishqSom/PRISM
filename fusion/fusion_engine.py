@@ -1,4 +1,4 @@
-# fusion/fusion_engine.py
+
 import json, time, os
 import numpy as np
 from datetime import datetime
@@ -6,10 +6,9 @@ from datetime import datetime
 # Paths
 ARDUINO_JSON = "fusion/arduino_data.json"
 LAST_METRICS = "fusion/latest_metrics.json"
-OPTICAL_COUNT_FILE = "fusion/optical_count.tmp" # optional simple exchange
+OPTICAL_COUNT_FILE = "fusion/optical_count.tmp" 
 
-# Parameters (tunable)
-VOLUME_ML = 100.0   # sample volume assumed for density calculation
+VOLUME_ML = 100.0   
 SPIKE_THRESHOLD = 700  # threshold on elec reading to detect a spike (tune)
 SPIKE_MIN_INTERVAL = 0.05  # seconds, debouncing spikes
 
@@ -18,7 +17,6 @@ last_elec = None
 spike_count = 0
 
 def estimate_optical_count():
-    # Quick approach: optical module can write its current count to optical_count.tmp if you prefer.
     if os.path.exists(OPTICAL_COUNT_FILE):
         try:
             with open(OPTICAL_COUNT_FILE,'r') as f:
@@ -38,7 +36,6 @@ def detect_spikes(elec_series, time_series):
     spikes = 0
     if not elec_series:
         return 0
-    # simple threshold crossing with debounce
     for v,t in zip(elec_series, time_series):
         if v >= SPIKE_THRESHOLD:
             if (t - last_spike_time) > SPIKE_MIN_INTERVAL:
@@ -47,8 +44,6 @@ def detect_spikes(elec_series, time_series):
     return spikes
 
 def compute_density(optical_count, spikes, volume_ml):
-    # simple fusion: weighted average, then convert to particles/ml
-    # weights: optical stronger if available
     w_opt = 0.65
     w_elec = 0.35
     combined = (w_opt*optical_count + w_elec*spikes)

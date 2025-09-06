@@ -1,7 +1,3 @@
-# cv/detector.py
-# Reads MJPEG stream or webcam and does simple blob detection.
-# Saves latest overlay frame to disk for Streamlit dashboard.
-
 import cv2
 import numpy as np
 import time
@@ -9,7 +5,7 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--stream", type=str, default="http://10.132.136.97:8080/video")
+parser.add_argument("--stream", type=str, default="http://192.168.3.104:8080/video")
 parser.add_argument("--save_frame", type=str, default="../fusion/latest_frame.jpg")
 parser.add_argument("--min_area", type=int, default=60)
 parser.add_argument("--max_area", type=int, default=5000)

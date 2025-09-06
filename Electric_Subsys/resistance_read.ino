@@ -18,8 +18,8 @@ void loop() {
   unsigned long now = millis();
   if (now - last >= SAMPLE_MS) {
     last = now;
-    int ldr = analogRead(LDR_PIN);       // 0-1023
-    int elec = analogRead(ELECT_PIN);    // 0-1023
+    int ldr = analogRead(LDR_PIN);       
+    int elec = analogRead(ELECT_PIN);    
     Serial.print(ldr);
     Serial.print(",");
     Serial.println(elec);
